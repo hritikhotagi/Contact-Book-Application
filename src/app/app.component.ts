@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ContactService } from './contact.service';
 import { Contact } from './contact.model';
 
@@ -7,20 +7,15 @@ import { Contact } from './contact.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   contacts: Contact[] = [];
   selectedContact: Contact | null = null; // Store the selected contact
   showDialog = false;  // Controls the visibility of the custom dialog
   isEditMode = false;  // To differentiate between Add and Edit mode
   contactToEdit: Contact = { id: 0, name: '', phoneNumber: '', address: '', isFavorite: false };  // Initialize with default values
 
-  constructor(private contactService: ContactService) {}
-
-  ngOnInit(): void {
-    // Subscribe to the contacts observable to get the updated list
-    this.contactService.contacts$.subscribe((contacts) => {
-      this.contacts = contacts;
-    });
+  constructor(private contactService: ContactService) {
+    this.contacts = this.contactService.getContacts();
 
     // Set the first contact as default selected (if contacts exist)
     if (this.contacts.length > 0) {
@@ -36,8 +31,10 @@ export class AppComponent implements OnInit {
   }
 
   deleteContact(contact: Contact): void {
-    this.contactService.deleteContacts([contact.id]);  // Delete the contact using the service
+    // Perform the delete action here, such as removing the contact from the array
+    this.contactService.deleteContacts([contact.id]);
     this.selectedContact = null;  // Clear the selection after deletion
+    this.refreshContacts();  // Refresh contact list
   }
 
   // Open the dialog for editing an existing contact
@@ -45,6 +42,20 @@ export class AppComponent implements OnInit {
     this.isEditMode = true;
     this.contactToEdit = { ...contact }; // Copy the contact to be edited
     this.showDialog = true;  // Show the dialog for editing
+  }
+
+  // Handle favorite toggle
+  onFavoriteToggled(updatedContact: Contact) {
+    this.contactService.updateContact(updatedContact);  // Update the contact in the service
+    this.refreshContacts();  // Refresh contact list
+  }
+
+  // Refresh contacts and set the updated contact as selected
+  refreshContacts(): void {
+    this.contacts = this.contactService.getContacts();
+    if (this.selectedContact) {
+      this.selectedContact = this.contacts.find(c => c.id === this.selectedContact!.id) || null;
+    }
   }
 
   // Method to close the dialog
@@ -63,7 +74,7 @@ export class AppComponent implements OnInit {
       const updatedContact = {
         ...this.contactToEdit,
         name: contactForm.value.name,
-        phoneNumber: contactForm.value.phoneNumber,
+        phoneNumber: this.contactToEdit.phoneNumber,  // Keep the original phone number since it's disabled
         address: contactForm.value.address
       };
       this.contactService.updateContact(updatedContact);
@@ -79,6 +90,7 @@ export class AppComponent implements OnInit {
       this.contactService.addContact(newContact);
     }
 
+    this.refreshContacts();  // Refresh contact list after add/edit
     this.closeDialog();
   }
 
