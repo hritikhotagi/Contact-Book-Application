@@ -11,7 +11,7 @@ export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
   
   @Input() selectedContact: Contact | null = null;  // To handle contact selection for highlighting
-  @Output() contactSelected = new EventEmitter<Contact>();
+  @Output() contactSelected = new EventEmitter<Contact | null>();  // Emit null when contacts are deleted
 
   deleteMode: boolean = false;  // Controls delete mode
   selectedContactsForDelete: Set<number> = new Set();  // Store IDs of selected contacts for deletion
@@ -67,21 +67,32 @@ export class ContactListComponent implements OnInit {
   // Delete selected contacts
   deleteContacts() {
     const contactIdsToDelete = Array.from(this.selectedContactsForDelete);
-    this.contactService.deleteContacts(contactIdsToDelete);  // Use the service method to delete contacts
+    
+    // If the selected contact is being deleted, clear the selected contact
+    if (this.selectedContact && contactIdsToDelete.includes(this.selectedContact.id)) {
+      this.contactSelected.emit(null);  // Emit null to clear the contact details
+      this.selectedContact = null;
+    }
+
+    // Use the service method to delete contacts
+    this.contactService.deleteContacts(contactIdsToDelete);
+    
     this.exitDeleteMode();  // Exit delete mode after deletion
   }
 
-  // Method to filter contacts based on search term
+  // Method to filter contacts based on search term and sort alphabetically
   filteredContacts() {
-    // If no search term, return all contacts
-    if (!this.searchTerm) {
-      return this.contacts;
+    // Filter contacts based on search term
+    let filteredContacts = this.contacts;
+
+    if (this.searchTerm) {
+      filteredContacts = this.contacts.filter(contact => 
+        contact.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        contact.phoneNumber.includes(this.searchTerm)
+      );
     }
 
-    // Filter contacts by name or any other field as per your need
-    return this.contacts.filter(contact => 
-      contact.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      contact.phoneNumber.includes(this.searchTerm)
-    );
+    // Sort the filtered contacts alphabetically by name
+    return filteredContacts.sort((a, b) => a.name.localeCompare(b.name));
   }
 }

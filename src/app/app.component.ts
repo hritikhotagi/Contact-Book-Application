@@ -31,10 +31,8 @@ export class AppComponent {
   }
 
   deleteContact(contact: Contact): void {
-    // Perform the delete action here, such as removing the contact from the array
     this.contactService.deleteContacts([contact.id]);
     this.selectedContact = null;  // Clear the selection after deletion
-    this.refreshContacts();  // Refresh contact list
   }
 
   // Open the dialog for editing an existing contact
@@ -74,7 +72,7 @@ export class AppComponent {
       const updatedContact = {
         ...this.contactToEdit,
         name: contactForm.value.name,
-        phoneNumber: this.contactToEdit.phoneNumber,  // Keep the original phone number since it's disabled
+        phoneNumber: contactForm.value.phoneNumber,
         address: contactForm.value.address
       };
       this.contactService.updateContact(updatedContact);
@@ -95,7 +93,7 @@ export class AppComponent {
   }
 
   // Method to set selected contact when emitted from ContactListComponent
-  onContactSelected(contact: Contact) {
+  onContactSelected(contact: Contact | null) {
     this.selectedContact = contact;
   }
 }
