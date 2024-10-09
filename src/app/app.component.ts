@@ -9,46 +9,45 @@ import { Contact } from './contact.model';
 })
 export class AppComponent {
   contacts: Contact[] = [];
-  selectedContact: Contact | null = null; // Store the selected contact
-  showDialog = false;  // Controls the visibility of the custom dialog
-  isEditMode = false;  // To differentiate between Add and Edit mode
-  contactToEdit: Contact = { id: 0, name: '', phoneNumber: '', address: '', isFavorite: false };  // Initialize with default values
+  selectedContact: Contact | null = null;
+  showDialog = false;
+  isEditMode = false;
+  contactToEdit: Contact = { id: 0, name: '', phoneNumber: '', address: '', isFavorite: false };
 
   constructor(private contactService: ContactService) {
     this.contacts = this.contactService.getContacts();
 
-    // Set the first contact as default selected (if contacts exist)
     if (this.contacts.length > 0) {
-      this.selectedContact = this.contacts[0];  // Select the first contact
+      this.selectedContact = this.contacts[0];
     }
   }
 
   // Open the dialog for adding a new contact
   openAddContactDialog(): void {
     this.isEditMode = false;
-    this.contactToEdit = { id: 0, name: '', phoneNumber: '', address: '', isFavorite: false }; // Reset contact for adding
-    this.showDialog = true;  // Show the dialog for adding a contact
+    this.contactToEdit = { id: 0, name: '', phoneNumber: '', address: '', isFavorite: false };
+    this.showDialog = true;
   }
 
   deleteContact(contact: Contact): void {
     this.contactService.deleteContacts([contact.id]);
-    this.selectedContact = null;  // Clear the selection after deletion
+    this.selectedContact = null;
+    this.refreshContacts(); 
   }
 
   // Open the dialog for editing an existing contact
   openEditContactDialog(contact: Contact): void {
     this.isEditMode = true;
-    this.contactToEdit = { ...contact }; // Copy the contact to be edited
-    this.showDialog = true;  // Show the dialog for editing
+    this.contactToEdit = { ...contact };
+    this.showDialog = true;
   }
 
   // Handle favorite toggle
   onFavoriteToggled(updatedContact: Contact) {
-    this.contactService.updateContact(updatedContact);  // Update the contact in the service
-    this.refreshContacts();  // Refresh contact list
+    this.contactService.updateContact(updatedContact);
+    this.refreshContacts();
   }
 
-  // Refresh contacts and set the updated contact as selected
   refreshContacts(): void {
     this.contacts = this.contactService.getContacts();
     if (this.selectedContact) {
@@ -56,28 +55,24 @@ export class AppComponent {
     }
   }
 
-  // Method to close the dialog
   closeDialog(): void {
     this.showDialog = false;
   }
 
-  // Handle form submission for both add and edit
   handleSubmit(contactForm: any): void {
     if (!contactForm.valid) {
       return;
     }
 
     if (this.isEditMode) {
-      // Update existing contact
       const updatedContact = {
         ...this.contactToEdit,
         name: contactForm.value.name,
-        phoneNumber: contactForm.value.phoneNumber,
+        phoneNumber: this.contactToEdit.phoneNumber,
         address: contactForm.value.address
       };
       this.contactService.updateContact(updatedContact);
     } else {
-      // Add new contact
       const newContact: Contact = {
         id: Date.now(),
         name: contactForm.value.name,
@@ -88,11 +83,10 @@ export class AppComponent {
       this.contactService.addContact(newContact);
     }
 
-    this.refreshContacts();  // Refresh contact list after add/edit
+    this.refreshContacts();
     this.closeDialog();
   }
 
-  // Method to set selected contact when emitted from ContactListComponent
   onContactSelected(contact: Contact | null) {
     this.selectedContact = contact;
   }

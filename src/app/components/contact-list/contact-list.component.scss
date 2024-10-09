@@ -83,7 +83,6 @@ li {
   background-color: rgb(255, 255, 255);
 }
 
-/* Highlight selected contact for display */
 li.contact-selected {
   background-color: #ff8a00;
   color: white;
@@ -153,14 +152,12 @@ mat-icon {
   font-size: 24px;
 }
 
-/* Scrollable container for all contact groups */
 .scroll-container {
   max-height: calc(100vh - 150px);
   overflow-y: auto;
   padding-right: 8px;
 }
 
-/* Custom scrollbar styling */
 .scroll-container::-webkit-scrollbar {
   width: 4px;
 }
@@ -175,24 +172,24 @@ mat-icon {
 }
 
 .checkbox {
-  appearance: none; /* Remove default checkbox styling */
+  appearance: none;
   width: 20px;
   height: 20px;
   margin-right: 10px;
-  background-color: transparent; /* Default unselected background */
-  border: 2px solid #ffcc99; /* Orange border */
+  background-color: transparent;
+  border: 2px solid #ffcc99;
   border-radius: 4px;
   cursor: pointer;
   position: relative;
 }
 
 .checkbox:checked {
-  background-color: #ffcc99; /* Orange background when selected */
-  border: none; /* Remove the border when checked */
+  background-color: #ffcc99;
+  border: none;
 }
 
 .checkbox:checked::before {
-  content: '✔'; /* Checkmark symbol */
+  content: '✔';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -203,7 +200,7 @@ mat-icon {
 }
 
 .checkbox:hover {
-  background-color: #ff8000; /* Light orange on hover */
+  background-color: #ff8000;
 }
 
 .action-buttons{

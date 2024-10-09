@@ -10,26 +10,22 @@ export class ContactDetailsComponent {
   @Input() selectedContact: Contact | null = null;
   @Output() editContact = new EventEmitter<Contact>();
   @Output() deleteContact = new EventEmitter<Contact>();
-  @Output() updateFavorite = new EventEmitter<Contact>();  // Emit updated contact when favorite is toggled
+  @Output() updateFavorite = new EventEmitter<Contact>();
 
-  showDeleteDialog = false; // Controls visibility of the custom delete dialog
+  showDeleteDialog = false;
 
-  // Trigger the edit action
   triggerEditContact(contact: Contact) {
     this.editContact.emit(contact);
   }
 
-  // Open the custom delete confirmation dialog
   openDeleteDialog() {
     this.showDeleteDialog = true;
   }
 
-  // Close the custom delete confirmation dialog
   closeDeleteDialog() {
     this.showDeleteDialog = false;
   }
 
-  // Confirm delete action
   confirmDelete() {
     if (this.selectedContact) {
       this.deleteContact.emit(this.selectedContact);
@@ -37,11 +33,10 @@ export class ContactDetailsComponent {
     }
   }
 
-  // Toggle favorite status and emit the updated contact
   toggleFavorite() {
     if (this.selectedContact) {
       this.selectedContact.isFavorite = !this.selectedContact.isFavorite;
-      this.updateFavorite.emit(this.selectedContact);  // Emit the updated contact
+      this.updateFavorite.emit(this.selectedContact);
     }
   }
 }

@@ -17,15 +17,15 @@
 }
 
 .sidebar {
-    flex: 0 0 16%;  // Sidebar gets 18% of the width
+    flex: 0 0 16%;
 }
 
 .contact-list {
-    flex: 0 0 70%;  // Contact list gets 55% of the width
+    flex: 0 0 70%;
 }
 
 .contact-details {
-    flex: 0 0 28%;  // Contact details gets 27% of the width
+    flex: 0 0 28%;
 }
 
 .custom-dialog {
@@ -125,7 +125,6 @@
     }
   }
   
-  /* Fade in animation for the dialog */
   @keyframes fadeIn {
     from {
       opacity: 0;
