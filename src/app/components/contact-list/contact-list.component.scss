@@ -1,35 +1,216 @@
-.contact-list {
-    background-color: #f8e7d1;
-    padding: 20px;
-    width: 40%;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  li {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
-    background-color: white;
-    margin-bottom: 10px;
-    border-radius: 10px;
-  }
-  
-  li:hover {
-    background-color: #ffcc99;
-  }
-  
-  img {
-    width: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .star-button {
-    margin-left: auto;
-  }
-  
+.contact-list-container {
+  background-color: #f8e7d1;
+  border-radius: 20px;
+  font-family: "Lato", sans-serif;
+  padding: 0 10px 0 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+h3 {
+  font-weight: 600;
+  margin: 12px;
+  font-size: 13px;
+  color: #6b6b6b;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.search-bar {
+  width: 100%;
+  border-radius: 20px;
+  margin-right: 10px;
+  border: 1px solid black;
+}
+
+.search-bar input {
+  width: 90%;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+}
+
+.search-bar input:focus {
+  border: none;
+  outline: none;
+}
+
+.search-icon {
+  position: relative;
+  top: 6px;
+  left: 10px;
+  font-size: 18px;
+}
+
+.delete-icon {
+  border: 1px solid black;
+  background-color: transparent;
+}
+
+.delete-icon mat-icon {
+  font-size: 18px;
+}
+
+.group-letter {
+  font-weight: 700;
+  margin: 10px;
+  font-size: 12px;
+  color: #6b6b6b;
+}
+
+ul {
+  list-style: none;
+  padding: 0 8px 0 8px;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 30px;
+  margin-bottom: 6px;
+  transition: background-color 0.3s ease;
+  background-color: rgb(255, 255, 255);
+}
+
+/* Highlight selected contact for display */
+li.contact-selected {
+  background-color: #ff8a00;
+  color: white;
+}
+
+li.contact-selected .contact-name {
+  color: white;
+}
+
+li.contact-selected .star-button {
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+}
+
+li.contact-selected .custom-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+  color: #ff8a00;
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+li:hover {
+  background-color: #ffcc99;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+}
+
+.custom-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #ff8a00;
+  border-radius: 50%;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.contact-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2e2e2e;
+  margin-left: 20px;
+}
+
+.star-button {
+  color: #2e2e2e;
+  background-color: transparent;
+  border: 1px solid #2e2e2e;
+}
+
+mat-icon {
+  font-size: 24px;
+}
+
+/* Scrollable container for all contact groups */
+.scroll-container {
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Custom scrollbar styling */
+.scroll-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #ffcc92;
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.checkbox {
+  appearance: none; /* Remove default checkbox styling */
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  background-color: transparent; /* Default unselected background */
+  border: 2px solid #ffcc99; /* Orange border */
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox:checked {
+  background-color: #ffcc99; /* Orange background when selected */
+  border: none; /* Remove the border when checked */
+}
+
+.checkbox:checked::before {
+  content: '✔'; /* Checkmark symbol */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.checkbox:hover {
+  background-color: #ff8000; /* Light orange on hover */
+}
+
+.action-buttons{
+  display: flex;
+  gap:10px;
+}
+
+.close-icon{
+  background-color: #ff8a00;
+}

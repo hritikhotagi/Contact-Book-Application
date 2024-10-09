@@ -7,7 +7,17 @@ import { Contact } from './contact.model';
 export class ContactService {
   contacts: Contact[] = [
     { id: 1, name: 'Adi', phoneNumber: '9203285932', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: true },
-    // Hardcoded contacts
+    { id: 2, name: 'Bahi', phoneNumber: '1234567890', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: false },  
+    { id: 3, name: 'Ashok', phoneNumber: '1234567890', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: false },
+    { id: 4, name: 'Adi', phoneNumber: '9203285932', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: true },
+    { id: 5, name: 'Bahi', phoneNumber: '1234567890', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: false },  
+    { id: 6, name: 'Ashok', phoneNumber: '1234567890', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: false },
+    { id: 7, name: 'Adi', phoneNumber: '9203285932', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: true },
+    { id: 8, name: 'Bahi', phoneNumber: '1234567890', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: false },  
+    { id: 9, name: 'Ashok', phoneNumber: '1234567890', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: false },
+    { id: 10, name: 'Adi', phoneNumber: '9203285932', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: true },
+    { id: 11, name: 'Bahi', phoneNumber: '1234567890', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: false },  
+    { id: 12, name: 'Ashok', phoneNumber: '1234567890', address: 'Xyz Street in abc cross, Bengaluru', isFavorite: false }
   ];
 
   getContacts() {

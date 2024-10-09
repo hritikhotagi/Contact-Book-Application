@@ -1,15 +1,47 @@
-<div class="contact-list">
-    <app-header></app-header>
-    <div class="contact-group">
+<div class="contact-list-container">
+  <h3>Displayed All Contacts</h3>
+  <div class="search-container">
+    <div class="search-bar">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input matInput placeholder="Search" />
+    </div>
+    <button *ngIf="!deleteMode" class="delete-icon" mat-icon-button matSuffix (click)="enterDeleteMode()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <div *ngIf="deleteMode" class="action-buttons">
+      <button class="delete-icon" mat-icon-button matSuffix [disabled]="!selectedContactsForDelete.size"
+        (click)="deleteContacts()">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button class="close-icon" mat-icon-button matSuffix (click)="exitDeleteMode()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scrollable container that wraps all contact groups -->
+  <div class="scroll-container">
+    <div class="contact-group" *ngFor="let group of contacts | groupBy: 'name'">
+      <div class="group-letter">{{ group.key }}</div>
       <ul>
-        <li *ngFor="let contact of contacts" (click)="selectContact(contact)">
-          <img src="assets/user-avatar.png" alt="Contact Image">
-          <span>{{ contact.name }}</span>
-          <button mat-icon-button class="star-button">
-            <mat-icon>star_border</mat-icon>
-          </button>
-        </li>
+        <div *ngFor="let contact of group.contacts" (click)="selectContact(contact)">
+          <li [class.contact-selected]="isSelectedForDisplay(contact)">
+            <div class="contact-info">
+              <input type="checkbox" class="checkbox" *ngIf="deleteMode" [checked]="isSelectedForDelete(contact.id)"
+            (click)="toggleDeleteSelection(contact.id)" />
+              <!-- Show checkbox in delete mode -->
+              <div class="custom-avatar">
+                {{ contact.name.charAt(0) }}
+              </div>
+              <span class="contact-name">{{ contact.name }}</span>
+            </div>
+            <button mat-icon-button class="star-button" (click)="$event.stopPropagation()">
+              <mat-icon *ngIf="contact.isFavorite; else notFavorite">star</mat-icon>
+              <ng-template #notFavorite><mat-icon>star_border</mat-icon></ng-template>
+            </button>
+          </li>
+        </div>
       </ul>
     </div>
   </div>
-  
+</div>

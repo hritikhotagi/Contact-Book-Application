@@ -1,16 +1,20 @@
-<div *ngIf="selectedContact" class="contact-details">
-    <img src="assets/user-avatar.png" alt="Contact Image">
-    <h2>{{ selectedContact.name }}</h2>
-    <p>
-      <mat-icon>phone</mat-icon> {{ selectedContact.phoneNumber }}
-    </p>
-    <p>
-      <mat-icon>location_on</mat-icon> {{ selectedContact.address }}
-    </p>
-    <div class="actions">
-      <button mat-icon-button (click)="editContact(selectedContact)">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </div>
+<div class="contact-details" *ngIf="selectedContact">
+  <div class="header">
+    <div class="custom-avatar">{{ selectedContact.name.charAt(0) }}</div>
+    <button mat-icon-button class="edit-button" (click)="onEditClick()">
+      <mat-icon>edit</mat-icon>
+    </button>
   </div>
-  
+
+  <h2>{{ selectedContact.name }}</h2>
+
+  <div class="contact-info">
+    <mat-icon class="contact-icon">phone</mat-icon>
+    <span class="contact-text">{{ selectedContact.phoneNumber }}</span>
+  </div>
+
+  <div class="contact-info">
+    <mat-icon class="contact-icon">location_on</mat-icon>
+    <span class="contact-text">{{ selectedContact.address }}</span>
+  </div>
+</div>

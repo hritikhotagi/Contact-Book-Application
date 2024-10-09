@@ -1,5 +1,47 @@
 <div class="main-layout">
-  <app-sidebar></app-sidebar>
-  <app-contact-list></app-contact-list>
-  <app-contact-details></app-contact-details>
+  <div>
+    <app-header></app-header>
+  </div>
+  <div class="main-container">
+    <div class="sidebar">
+      <app-sidebar (addContact)="openAddContactDialog()"></app-sidebar>
+    </div>
+
+    <!-- Listen for contactSelected event and pass selectedContact to ContactDetails -->
+    <div class="contact-list">
+      <app-contact-list 
+        (contactSelected)="onContactSelected($event)" 
+        [selectedContact]="selectedContact"></app-contact-list>
+    </div>
+
+    <div class="contact-details">
+      <app-contact-details [selectedContact]="selectedContact" (editContact)="openEditContactDialog($event)"></app-contact-details>
+    </div>
+  </div>
+
+  <!-- Custom Dialog Box -->
+  <div class="custom-dialog" *ngIf="showDialog">
+    <div class="dialog-overlay" (click)="closeDialog()"></div> <!-- Overlay for click outside to close -->
+    <div class="dialog-content">
+      <h2>{{ isEditMode ? 'Update Contact' : 'Add Contact' }}</h2>
+      <form #contactForm="ngForm" (ngSubmit)="handleSubmit(contactForm.value)">
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" ngModel [value]="contactToEdit?.name" required />
+        </div>
+        <div class="form-field">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="text" id="phoneNumber" name="phoneNumber" ngModel [value]="contactToEdit?.phoneNumber" [disabled]="isEditMode" required />
+        </div>
+        <div class="form-field">
+          <label for="address">Address</label>
+          <textarea id="address" name="address" ngModel [value]="contactToEdit?.address" required></textarea>
+        </div>
+        <div class="dialog-actions">
+          <button type="button" class="cancel-button" (click)="closeDialog()">Cancel</button>
+          <button type="submit" class="add-button" [disabled]="!contactForm.valid">{{ isEditMode ? 'Update' : 'Add' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

@@ -1,27 +1,81 @@
 .sidebar {
     background-color: #f9e4cf;
-    padding: 20px;
-    width: 20%;
-  }
+    width: 100%;
+    font-family: "Lato", sans-serif;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    border-radius: 20px;
+}
   
-  ul {
+ul {
     list-style: none;
-    padding: 0;
-  }
-  
-  li {
+    padding: 10px;
+    width: 93%;
+    margin-top: 30px;
+}
+
+li {
     padding: 10px;
     cursor: pointer;
-  }
-  
-  .active {
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+li:hover {
     background-color: #ff8a00;
     color: white;
-  }
-  
-  .add-contact-button {
-    margin-top: 20px;
+}
+
+li:hover span {
+    background-color: white;
+    color: rgb(43, 43, 43);
+}
+
+.active {
     background-color: #ff8a00;
     color: white;
-  }
-  
+}
+
+.buttonContainer {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+}
+
+.add-contact-button {
+    background-color: #ff8a00;
+    color: white;
+    width: 93%;
+    border-radius: 20px;
+    font-weight: 600;
+    padding: 10px 0 10px 0;
+    border: none;
+}
+
+.add-contact-button:hover {
+    background-color: #ffb158;
+    color: white;
+}
+
+span {
+    padding: 6px 9px 6px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: rgb(131, 131, 131);
+    color: rgb(255, 255, 255);
+    float: right;
+    margin-top: -3px;
+}
+
+.active span {
+    color: rgb(43, 43, 43);
+    background-color: rgb(255, 255, 255);
+}
+
+/* Custom Dialog Styling */

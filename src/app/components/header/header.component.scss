@@ -1,10 +1,20 @@
 .header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .search-bar {
-    width: 60%;
-  }
-  
+    gap: 30px;
+    background-color: #fae5cc;
+    height: 50px;
+    margin: 5px;
+    border-radius: 20px;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+}
+
+.logo{
+    margin-left: 20px;
+    font-weight: 800;
+}
+
+.title{
+    font-size: 18px;
+    margin-top: 15px;
+}

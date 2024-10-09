@@ -4,5 +4,6 @@ export interface Contact {
     phoneNumber: string;
     address: string;
     isFavorite: boolean;
+    isSelected?: boolean;
 }
   

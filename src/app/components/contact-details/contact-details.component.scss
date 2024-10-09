@@ -1,21 +1,89 @@
 .contact-details {
-    background-color: #fdf1e2;
+    background-color: #f9e4cf;
+    border-radius: 20px;
     padding: 20px;
-    width: 40%;
-  }
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    color: #2e2e2e;
+    position: relative;
   
-  img {
-    width: 100px;
-    border-radius: 50%;
-  }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   
-  h2 {
-    margin: 10px 0;
-  }
+    /* Custom Avatar Style */
+    .custom-avatar {
+      width: 120px;
+      height: 120px;
+      background-color: #ff8a00;  // You can change the background color as desired
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 48px;  // Adjust the size of the text
+      font-weight: 700;
+      color: white;     // Text color
+      margin: 0 auto;
+    }
   
-  .actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
+    .edit-button {
+      background-color: transparent;
+      border: 1px solid black;
+      color: #2e2e2e;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
   
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 20px 0;
+      color: #2e2e2e;
+    }
+  
+    .contact-info {
+      display: flex;
+      margin: 20px 0;
+  
+      .contact-icon {
+        font-size: 20px;
+        color: #2e2e2e;
+        margin-right: 10px;
+      }
+  
+      .contact-text {
+        font-size: 16px;
+        font-weight: 600;
+      }
+    }
+  
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+  
+      button {
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        border-radius: 50%;
+        margin: 0 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+        mat-icon {
+          font-size: 24px;
+          color: #2e2e2e;
+        }
+  
+        &:hover {
+          background-color: #ffcc99;
+        }
+      }
+    }
+  }
+  .data-container{
+    margin-top: 40px;
+  }
