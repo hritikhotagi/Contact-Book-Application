@@ -3,12 +3,27 @@
     <div class="custom-avatar">
       {{ selectedContact.name.charAt(0) }}
     </div>
-    <button mat-icon-button class="edit-button" (click)="triggerEditContact(selectedContact)">
-      <mat-icon>edit</mat-icon>
-    </button>
+    <div class="header-actions">
+      <button mat-icon-button class="edit-button" (click)="triggerEditContact(selectedContact)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button class="delete-button" (click)="openDeleteDialog()">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+
+      <!-- Add Favorite Button Below Delete -->
+      <div class="favorite-button">
+        <button mat-icon-button class="star-button" (click)="toggleFavorite()">
+          <mat-icon *ngIf="selectedContact?.isFavorite; else notFavorite">star</mat-icon>
+          <ng-template #notFavorite><mat-icon>star_border</mat-icon></ng-template>
+        </button>
+      </div>
+    </div>
   </div>
 
   <h2>{{ selectedContact.name }}</h2>
+
   <div class="contact-info">
     <mat-icon class="contact-icon">phone</mat-icon>
     <span class="contact-text">{{ selectedContact.phoneNumber }}</span>
@@ -17,6 +32,7 @@
     <mat-icon class="contact-icon">location_on</mat-icon>
     <span class="contact-text">{{ selectedContact.address }}</span>
   </div>
+
   <div class="action-buttons">
     <button mat-icon-button>
       <mat-icon>call</mat-icon>
@@ -27,5 +43,19 @@
     <button mat-icon-button>
       <mat-icon>video_call</mat-icon>
     </button>
+  </div>
+</div>
+
+<!-- Custom Delete Confirmation Dialog -->
+<div class="custom-dialog" *ngIf="showDeleteDialog">
+  <div class="dialog-overlay" (click)="closeDeleteDialog()"></div>
+  <!-- Overlay to close the dialog when clicked outside -->
+  <div class="dialog-content">
+    <h3>Confirm Delete</h3>
+    <p>Are you sure you want to delete this contact?</p>
+    <div class="dialog-actions">
+      <button (click)="closeDeleteDialog()">No</button>
+      <button (click)="confirmDelete()">Yes</button>
+    </div>
   </div>
 </div>

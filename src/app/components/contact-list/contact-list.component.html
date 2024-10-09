@@ -3,10 +3,11 @@
   <div class="search-container">
     <div class="search-bar">
       <mat-icon class="search-icon">search</mat-icon>
-      <input matInput placeholder="Search" />
+      <!-- Bind the search input to a variable 'searchTerm' -->
+      <input matInput placeholder="Search" [(ngModel)]="searchTerm" />
     </div>
     <button *ngIf="!deleteMode" class="delete-icon" mat-icon-button matSuffix (click)="enterDeleteMode()">
-      <mat-icon>delete</mat-icon>
+      <mat-icon>more_vert</mat-icon>
     </button>
     <div *ngIf="deleteMode" class="action-buttons">
       <button class="delete-icon" mat-icon-button matSuffix [disabled]="!selectedContactsForDelete.size"
@@ -21,24 +22,25 @@
 
   <!-- Scrollable container that wraps all contact groups -->
   <div class="scroll-container">
-    <div class="contact-group" *ngFor="let group of contacts | groupBy: 'name'">
+    <!-- Filter contacts based on search term -->
+    <div class="contact-group" *ngFor="let group of filteredContacts() | groupBy: 'name'">
       <div class="group-letter">{{ group.key }}</div>
       <ul>
         <div *ngFor="let contact of group.contacts" (click)="selectContact(contact)">
           <li [class.contact-selected]="isSelectedForDisplay(contact)">
             <div class="contact-info">
               <input type="checkbox" class="checkbox" *ngIf="deleteMode" [checked]="isSelectedForDelete(contact.id)"
-            (click)="toggleDeleteSelection(contact.id)" />
+                (click)="toggleDeleteSelection(contact.id)" />
               <!-- Show checkbox in delete mode -->
               <div class="custom-avatar">
                 {{ contact.name.charAt(0) }}
               </div>
               <span class="contact-name">{{ contact.name }}</span>
             </div>
-            <button mat-icon-button class="star-button" (click)="$event.stopPropagation()">
+            <!-- <button mat-icon-button class="star-button" (click)="$event.stopPropagation()">
               <mat-icon *ngIf="contact.isFavorite; else notFavorite">star</mat-icon>
               <ng-template #notFavorite><mat-icon>star_border</mat-icon></ng-template>
-            </button>
+            </button> -->
           </li>
         </div>
       </ul>

@@ -1,45 +1,81 @@
 <div class="main-layout">
   <div>
-    <app-header></app-header>
+    <app-header (addContact)="openAddContactDialog()"></app-header>
   </div>
   <div class="main-container">
-    <div class="sidebar">
-      <app-sidebar (addContact)="openAddContactDialog()"></app-sidebar>
-    </div>
-
-    <!-- Listen for contactSelected event and pass selectedContact to ContactDetails -->
     <div class="contact-list">
-      <app-contact-list 
-        (contactSelected)="onContactSelected($event)" 
+      <app-contact-list (contactSelected)="onContactSelected($event)"
         [selectedContact]="selectedContact"></app-contact-list>
     </div>
 
     <div class="contact-details">
-      <app-contact-details [selectedContact]="selectedContact" (editContact)="openEditContactDialog($event)"></app-contact-details>
+      <app-contact-details
+        [selectedContact]="selectedContact"
+        (editContact)="openEditContactDialog($event)"
+        (deleteContact)="deleteContact($event)">
+      </app-contact-details>
     </div>
   </div>
 
   <!-- Custom Dialog Box -->
   <div class="custom-dialog" *ngIf="showDialog">
-    <div class="dialog-overlay" (click)="closeDialog()"></div> <!-- Overlay for click outside to close -->
+    <div class="dialog-overlay" (click)="closeDialog()"></div>
     <div class="dialog-content">
       <h2>{{ isEditMode ? 'Update Contact' : 'Add Contact' }}</h2>
-      <form #contactForm="ngForm" (ngSubmit)="handleSubmit(contactForm.value)">
-        <div class="form-field">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" [(ngModel)]="contactToEdit.name" required />
+
+      <form #contactForm="ngForm" (ngSubmit)="handleSubmit(contactForm)">
+        <div *ngIf="!contactForm.valid && contactForm.touched" class="global-errors">
+          <p *ngIf="name.invalid">Name is invalid</p>
+          <p *ngIf="phoneNumber.invalid">Phone number is invalid</p>
         </div>
+
         <div class="form-field">
-          <label for="phoneNumber">Phone Number</label>
-          <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="contactToEdit.phoneNumber" [disabled]="isEditMode" required />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            [(ngModel)]="contactToEdit.name"
+            placeholder="Name"
+            #name="ngModel"
+            maxlength="50"
+            required />
+          <div *ngIf="name.invalid && name.touched" class="error">
+            <small *ngIf="name.errors?.['required']">Name is required</small>
+            <small *ngIf="name.errors?.['maxlength']">Name cannot exceed 50 characters</small>
+          </div>
         </div>
+
         <div class="form-field">
-          <label for="address">Address</label>
-          <textarea id="address" name="address" [(ngModel)]="contactToEdit.address" required></textarea>
+          <input
+            type="text"
+            id="phoneNumber"
+            name="phoneNumber"
+            [(ngModel)]="contactToEdit.phoneNumber"
+            placeholder="Phone number"
+            #phoneNumber="ngModel"
+            pattern="^[0-9]{10}$"
+            maxlength="10"
+            required />
+          <div *ngIf="phoneNumber.invalid && phoneNumber.touched" class="error">
+            <small *ngIf="phoneNumber.errors?.['required']">Phone number is required</small>
+            <small *ngIf="phoneNumber.errors?.['pattern']">Phone number must be 10 digits</small>
+          </div>
         </div>
+
+        <div class="form-field">
+          <textarea
+            id="address"
+            name="address"
+            [(ngModel)]="contactToEdit.address"
+            placeholder="Address"
+            required></textarea>
+        </div>
+
         <div class="dialog-actions">
           <button type="button" class="cancel-button" (click)="closeDialog()">Cancel</button>
-          <button type="submit" class="add-button" [disabled]="!contactForm.valid">{{ isEditMode ? 'Update' : 'Add' }}</button>
+          <button type="submit" class="add-button" [disabled]="!contactForm.valid">
+            {{ isEditMode ? 'Update' : 'Add' }}
+          </button>
         </div>
       </form>
     </div>

@@ -7,6 +7,8 @@
     border-radius: 20px;
     font-family: "Lato", sans-serif;
     font-weight: 400;
+    align-items: center;
+    position: relative;
 }
 
 .logo{
@@ -17,4 +19,28 @@
 .title{
     font-size: 18px;
     margin-top: 15px;
+}
+
+.add-contact-button {
+    background-color: #ff8a00;
+    color: white;
+    border-radius: 20px;
+    font-weight: 600;
+    padding: 5px 25px 5px 25px;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top:8px;
+}
+
+.add-contact-button:hover {
+    background-color: #ffb158;
+    color: white;
+}
+
+.person{
+    font-size: 18px;
+    position: relative;
+    top: 4px;
+    right: 5px;
 }

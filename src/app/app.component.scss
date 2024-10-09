@@ -1,5 +1,7 @@
 .main-layout {
     margin: 10px;
+    width: 75%;
+    margin: auto;
 }
 
 .main-container{
@@ -19,11 +21,11 @@
 }
 
 .contact-list {
-    flex: 0 0 55%;  // Contact list gets 55% of the width
+    flex: 0 0 70%;  // Contact list gets 55% of the width
 }
 
 .contact-details {
-    flex: 0 0 27%;  // Contact details gets 27% of the width
+    flex: 0 0 28%;  // Contact details gets 27% of the width
 }
 
 .custom-dialog {
@@ -58,6 +60,7 @@
       animation: fadeIn 0.3s ease-in-out;
   
       h2 {
+        margin: 0;
         margin-bottom: 20px;
         font-size: 20px;
         color: #ff8a00;
@@ -80,6 +83,7 @@
           flex: 2;
           padding: 10px;
           border: 1px solid #ff8a00;
+          background-color: #ffefdc;
           border-radius: 10px;
           outline: none;
           width: 100%;
@@ -131,5 +135,28 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+  
+
+  .global-errors {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .dialog-content .form-field {
+    margin-bottom: 20px;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+    border-color: red;
   }
   

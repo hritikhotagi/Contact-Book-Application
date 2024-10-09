@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ContactService } from './contact.service';
 import { Contact } from './contact.model';
 
@@ -7,16 +7,20 @@ import { Contact } from './contact.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   contacts: Contact[] = [];
   selectedContact: Contact | null = null; // Store the selected contact
-  selectedContactIds: number[] = [];
   showDialog = false;  // Controls the visibility of the custom dialog
   isEditMode = false;  // To differentiate between Add and Edit mode
   contactToEdit: Contact = { id: 0, name: '', phoneNumber: '', address: '', isFavorite: false };  // Initialize with default values
 
-  constructor(private contactService: ContactService) {
-    this.contacts = this.contactService.getContacts();
+  constructor(private contactService: ContactService) {}
+
+  ngOnInit(): void {
+    // Subscribe to the contacts observable to get the updated list
+    this.contactService.contacts$.subscribe((contacts) => {
+      this.contacts = contacts;
+    });
 
     // Set the first contact as default selected (if contacts exist)
     if (this.contacts.length > 0) {
@@ -29,6 +33,11 @@ export class AppComponent {
     this.isEditMode = false;
     this.contactToEdit = { id: 0, name: '', phoneNumber: '', address: '', isFavorite: false }; // Reset contact for adding
     this.showDialog = true;  // Show the dialog for adding a contact
+  }
+
+  deleteContact(contact: Contact): void {
+    this.contactService.deleteContacts([contact.id]);  // Delete the contact using the service
+    this.selectedContact = null;  // Clear the selection after deletion
   }
 
   // Open the dialog for editing an existing contact
@@ -44,29 +53,32 @@ export class AppComponent {
   }
 
   // Handle form submission for both add and edit
-  handleSubmit(contactData: any): void {
-    if (this.isEditMode && this.contactToEdit) {
+  handleSubmit(contactForm: any): void {
+    if (!contactForm.valid) {
+      return;
+    }
+
+    if (this.isEditMode) {
       // Update existing contact
       const updatedContact = {
         ...this.contactToEdit,
-        name: contactData.name,
-        address: contactData.address
+        name: contactForm.value.name,
+        phoneNumber: contactForm.value.phoneNumber,
+        address: contactForm.value.address
       };
       this.contactService.updateContact(updatedContact);
     } else {
       // Add new contact
       const newContact: Contact = {
         id: Date.now(),
-        name: contactData.name,
-        phoneNumber: contactData.phoneNumber,
-        address: contactData.address,
+        name: contactForm.value.name,
+        phoneNumber: contactForm.value.phoneNumber,
+        address: contactForm.value.address,
         isFavorite: false
       };
       this.contactService.addContact(newContact);
     }
 
-    // Refresh contact list and close the dialog
-    this.contacts = this.contactService.getContacts();
     this.closeDialog();
   }
 

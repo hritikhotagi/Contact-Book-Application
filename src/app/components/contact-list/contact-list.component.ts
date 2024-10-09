@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ContactService } from 'src/app/contact.service';
 import { Contact } from 'src/app/contact.model';
 
@@ -7,7 +7,7 @@ import { Contact } from 'src/app/contact.model';
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss']
 })
-export class ContactListComponent {
+export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
   
   @Input() selectedContact: Contact | null = null;  // To handle contact selection for highlighting
@@ -16,8 +16,16 @@ export class ContactListComponent {
   deleteMode: boolean = false;  // Controls delete mode
   selectedContactsForDelete: Set<number> = new Set();  // Store IDs of selected contacts for deletion
 
-  constructor(private contactService: ContactService) {
-    this.contacts = this.contactService.getContacts();
+  // Variable to store search term
+  searchTerm: string = '';
+
+  constructor(private contactService: ContactService) {}
+
+  ngOnInit(): void {
+    // Subscribe to the contacts$ observable to update the contact list whenever it changes
+    this.contactService.contacts$.subscribe(contacts => {
+      this.contacts = contacts;
+    });
   }
 
   // Emit the selected contact for highlighting (not related to deletion)
@@ -58,7 +66,22 @@ export class ContactListComponent {
 
   // Delete selected contacts
   deleteContacts() {
-    this.contacts = this.contacts.filter(contact => !this.selectedContactsForDelete.has(contact.id));
+    const contactIdsToDelete = Array.from(this.selectedContactsForDelete);
+    this.contactService.deleteContacts(contactIdsToDelete);  // Use the service method to delete contacts
     this.exitDeleteMode();  // Exit delete mode after deletion
+  }
+
+  // Method to filter contacts based on search term
+  filteredContacts() {
+    // If no search term, return all contacts
+    if (!this.searchTerm) {
+      return this.contacts;
+    }
+
+    // Filter contacts by name or any other field as per your need
+    return this.contacts.filter(contact => 
+      contact.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      contact.phoneNumber.includes(this.searchTerm)
+    );
   }
 }
