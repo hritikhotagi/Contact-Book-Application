@@ -13,7 +13,7 @@ export class AppComponent {
   selectedContactIds: number[] = [];
   showDialog = false;  // Controls the visibility of the custom dialog
   isEditMode = false;  // To differentiate between Add and Edit mode
-  contactToEdit: Contact | null = null;  // To store the contact that needs to be edited
+  contactToEdit: Contact = { id: 0, name: '', phoneNumber: '', address: '', isFavorite: false };  // Initialize with default values
 
   constructor(private contactService: ContactService) {
     this.contacts = this.contactService.getContacts();
@@ -27,14 +27,14 @@ export class AppComponent {
   // Open the dialog for adding a new contact
   openAddContactDialog(): void {
     this.isEditMode = false;
-    this.contactToEdit = null;
+    this.contactToEdit = { id: 0, name: '', phoneNumber: '', address: '', isFavorite: false }; // Reset contact for adding
     this.showDialog = true;  // Show the dialog for adding a contact
   }
 
   // Open the dialog for editing an existing contact
   openEditContactDialog(contact: Contact): void {
     this.isEditMode = true;
-    this.contactToEdit = contact;
+    this.contactToEdit = { ...contact }; // Copy the contact to be edited
     this.showDialog = true;  // Show the dialog for editing
   }
 

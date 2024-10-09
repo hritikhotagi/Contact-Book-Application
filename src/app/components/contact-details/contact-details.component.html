@@ -1,20 +1,31 @@
 <div class="contact-details" *ngIf="selectedContact">
   <div class="header">
-    <div class="custom-avatar">{{ selectedContact.name.charAt(0) }}</div>
-    <button mat-icon-button class="edit-button" (click)="onEditClick()">
+    <div class="custom-avatar">
+      {{ selectedContact.name.charAt(0) }}
+    </div>
+    <button mat-icon-button class="edit-button" (click)="triggerEditContact(selectedContact)">
       <mat-icon>edit</mat-icon>
     </button>
   </div>
 
   <h2>{{ selectedContact.name }}</h2>
-
   <div class="contact-info">
     <mat-icon class="contact-icon">phone</mat-icon>
     <span class="contact-text">{{ selectedContact.phoneNumber }}</span>
   </div>
-
   <div class="contact-info">
     <mat-icon class="contact-icon">location_on</mat-icon>
     <span class="contact-text">{{ selectedContact.address }}</span>
+  </div>
+  <div class="action-buttons">
+    <button mat-icon-button>
+      <mat-icon>call</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>message</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>video_call</mat-icon>
+    </button>
   </div>
 </div>

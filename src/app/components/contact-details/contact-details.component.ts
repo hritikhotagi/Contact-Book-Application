@@ -10,10 +10,7 @@ export class ContactDetailsComponent {
   @Input() selectedContact: Contact | null = null;
   @Output() editContact = new EventEmitter<Contact>();  // EventEmitter to notify the parent component
 
-  // Method to emit the event when the edit button is clicked
-  onEditClick() {
-    if (this.selectedContact) {
-      this.editContact.emit(this.selectedContact);
-    }
+  triggerEditContact(contact: Contact) {
+    this.editContact.emit(contact); // Emit event to parent component
   }
 }

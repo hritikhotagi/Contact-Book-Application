@@ -53,7 +53,7 @@ export class ContactListComponent {
 
   // Check if a contact is selected for display/highlighting
   isSelectedForDisplay(contact: Contact): boolean {
-    return this.selectedContact ? contact.id === this.selectedContact.id : false;
+    return this.selectedContact?.id === contact.id;
   }
 
   // Delete selected contacts

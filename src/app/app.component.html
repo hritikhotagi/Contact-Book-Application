@@ -27,15 +27,15 @@
       <form #contactForm="ngForm" (ngSubmit)="handleSubmit(contactForm.value)">
         <div class="form-field">
           <label for="name">Name</label>
-          <input type="text" id="name" name="name" ngModel [value]="contactToEdit?.name" required />
+          <input type="text" id="name" name="name" [(ngModel)]="contactToEdit.name" required />
         </div>
         <div class="form-field">
           <label for="phoneNumber">Phone Number</label>
-          <input type="text" id="phoneNumber" name="phoneNumber" ngModel [value]="contactToEdit?.phoneNumber" [disabled]="isEditMode" required />
+          <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="contactToEdit.phoneNumber" [disabled]="isEditMode" required />
         </div>
         <div class="form-field">
           <label for="address">Address</label>
-          <textarea id="address" name="address" ngModel [value]="contactToEdit?.address" required></textarea>
+          <textarea id="address" name="address" [(ngModel)]="contactToEdit.address" required></textarea>
         </div>
         <div class="dialog-actions">
           <button type="button" class="cancel-button" (click)="closeDialog()">Cancel</button>
