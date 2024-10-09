@@ -1,0 +1,27 @@
+.sidebar {
+    background-color: #f9e4cf;
+    padding: 20px;
+    width: 20%;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .active {
+    background-color: #ff8a00;
+    color: white;
+  }
+  
+  .add-contact-button {
+    margin-top: 20px;
+    background-color: #ff8a00;
+    color: white;
+  }
+  

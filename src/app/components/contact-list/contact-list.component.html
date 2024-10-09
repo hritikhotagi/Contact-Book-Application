@@ -1,0 +1,15 @@
+<div class="contact-list">
+    <app-header></app-header>
+    <div class="contact-group">
+      <ul>
+        <li *ngFor="let contact of contacts" (click)="selectContact(contact)">
+          <img src="assets/user-avatar.png" alt="Contact Image">
+          <span>{{ contact.name }}</span>
+          <button mat-icon-button class="star-button">
+            <mat-icon>star_border</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

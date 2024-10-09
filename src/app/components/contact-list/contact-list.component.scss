@@ -1,0 +1,35 @@
+.contact-list {
+    background-color: #f8e7d1;
+    padding: 20px;
+    width: 40%;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    background-color: white;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+  
+  li:hover {
+    background-color: #ffcc99;
+  }
+  
+  img {
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .star-button {
+    margin-left: auto;
+  }
+  
