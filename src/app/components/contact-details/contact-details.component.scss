@@ -183,3 +183,53 @@
   background-color: transparent;
   border: 1px solid #2e2e2e;
 }
+
+
+@media screen and (max-width: 600px) {
+  .contact-details {
+    background-color: #f9e4cf;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    color: #2e2e2e;
+    position: relative;
+    max-width: 100%;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+
+  .custom-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .header-actions {
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  h2 {
+    font-size: 16px;
+    margin: 10px 0;
+    max-width: 100%;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+  .contact-info {
+    margin: 10px 0;
+    font-size: 14px;
+  }
+
+  .action-buttons button {
+    width: 40px;
+    height: 40px;
+  }
+}

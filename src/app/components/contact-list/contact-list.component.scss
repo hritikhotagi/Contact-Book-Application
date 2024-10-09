@@ -211,3 +211,58 @@ mat-icon {
 .close-icon{
   background-color: #ff8a00;
 }
+
+@media screen and (max-width: 600px) {
+  .contact-list-container {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .search-bar input {
+    padding: 10px;
+    font-size: 14px;
+    width: 75%;
+  }
+
+  .search-bar {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .group-letter {
+    font-size: 12px;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .custom-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .contact-name {
+    font-size: 14px;
+  }
+
+  .scroll-container {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .checkbox {
+    width: 16px;
+    height: 16px;
+  }
+
+  .delete-icon mat-icon {
+    font-size: 18px;
+  }
+}

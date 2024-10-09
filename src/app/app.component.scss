@@ -159,3 +159,24 @@
     border-color: red;
   }
   
+  @media screen and (max-width: 600px) {
+    .main-layout {
+      padding: 10px;
+      width: 87%;
+    }
+  
+    .main-container {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .contact-list, .contact-details {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .contact-list, .contact-details {
+      flex: 1 1 100%;
+    }
+  }
+  

@@ -44,3 +44,27 @@
     top: 4px;
     right: 5px;
 }
+
+@media screen and (max-width: 600px) {
+    .header {
+      padding: 5px 10px;
+      gap: 10px;
+      height: 40px;
+    }
+  
+    .logo {
+      width: 18px;
+    }
+  
+    .title {
+      font-size: 14px;
+      margin-top: 0;
+      visibility: hidden;
+    }
+  
+    .add-contact-button {
+      font-size: 12px;
+      padding: 5px 10px;
+    }
+  }
+  
