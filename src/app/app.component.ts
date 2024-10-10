@@ -42,7 +42,6 @@ export class AppComponent {
     this.showDialog = true;
   }
 
-  // Handle favorite toggle
   onFavoriteToggled(updatedContact: Contact) {
     this.contactService.updateContact(updatedContact);
     this.refreshContacts();

@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ContactService {
-  // Initial contacts array
   private contacts: Contact[] = [
     { id: 1, name: 'Amit', phoneNumber: '9876543210', address: '123 MG Road, Delhi', isFavorite: true },
     { id: 2, name: 'Anjali', phoneNumber: '4321098765', address: '15 Gariahat Road, Kolkata', isFavorite: true },
@@ -25,10 +24,8 @@ export class ContactService {
     { id: 15, name: 'Vikram', phoneNumber: '8765043219', address: '56 CP Ramaswamy Road, Chennai', isFavorite: false }
   ];
 
-  // BehaviorSubject to store the contact list and emit updates
   private contactsSubject = new BehaviorSubject<Contact[]>(this.contacts);
 
-  // Observable that the components can subscribe to for updates
   contacts$ = this.contactsSubject.asObservable();
 
   getContacts() {
@@ -36,21 +33,21 @@ export class ContactService {
   }
 
   addContact(contact: Contact) {
-    contact.id = Date.now(); // Assign a unique ID to the contact
+    contact.id = Date.now();
     this.contacts.push(contact);
-    this.contactsSubject.next([...this.contacts]); // Emit updated list
+    this.contactsSubject.next([...this.contacts]);
   }
 
   updateContact(updatedContact: Contact) {
     const index = this.contacts.findIndex(c => c.id === updatedContact.id);
     if (index !== -1) {
       this.contacts[index] = updatedContact;
-      this.contactsSubject.next([...this.contacts]); // Emit updated list
+      this.contactsSubject.next([...this.contacts]); 
     }
   }
 
   deleteContacts(contactIds: number[]) {
     this.contacts = this.contacts.filter(contact => !contactIds.includes(contact.id));
-    this.contactsSubject.next([...this.contacts]); // Emit updated list
+    this.contactsSubject.next([...this.contacts]);
   }
 }

@@ -9,7 +9,7 @@ export class GroupByPipe implements PipeTransform {
     if (!value) return [];
 
     const groupedObj = value.reduce((acc, obj) => {
-      const key = obj[field].charAt(0).toUpperCase();  // Group by the first letter of the name
+      const key = obj[field].charAt(0).toUpperCase();
       if (!acc[key]) {
         acc[key] = [];
       }

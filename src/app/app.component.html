@@ -38,7 +38,7 @@
             [(ngModel)]="contactToEdit.name"
             placeholder="Name"
             #name="ngModel"
-            maxlength="50"
+            maxlength="30"
             required />
           <div *ngIf="name.invalid && name.touched" class="error">
             <small *ngIf="name.errors?.['required']">Name is required</small>
